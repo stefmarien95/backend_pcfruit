@@ -23,12 +23,12 @@ $data = json_decode(file_get_contents("php://input"));
 // make sure data is not empty
 if(
     !empty($data->vatId) &&
-    !empty($data->voornaam) &&
-    !empty($data->naam) &&
-    !empty($data->gebruikersnaam) &&
-    !empty($data->wachtwoord) &&
-    !empty($data->email) &&
-    !empty($data->telefoonnummer)
+    !empty($data->persmethodeId) &&
+    !empty($data->persHoeveelheid) &&
+    !empty($data->oogst) &&
+    !empty($data->persDruk) &&
+    !empty($data->actief)
+
 
 ){
 
@@ -41,7 +41,7 @@ if(
 
 
 
-    if($gebruiker->create()){
+    if($vinificatie->create()){
 
         // set response code - 201 created
         http_response_code(201);

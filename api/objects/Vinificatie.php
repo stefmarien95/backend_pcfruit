@@ -54,7 +54,7 @@ class Vinificatie{
         $query = "INSERT INTO
                 " . $this->table_name . "
             SET
-                vatId=:vatId, persmethodeId=:persmethodeId, naam=:naam, actief=:actief, persHoeveelheid=:persHoeveelheid, oogst=:oogst, persDruk=:persDruk";
+                vatId=:vatId, persmethodeId=:persmethodeId,persHoeveelheid=:persHoeveelheid, oogst=:oogst, persDruk=:persDruk, actief=:actief";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -62,10 +62,10 @@ class Vinificatie{
         // sanitize
         $this->vatId=htmlspecialchars(strip_tags($this->vatId));
         $this->persmethodeId=htmlspecialchars(strip_tags($this->persmethodeId));
-        $this->actief=htmlspecialchars(strip_tags($this->actief));
         $this->persHoeveelheid=htmlspecialchars(strip_tags($this->persHoeveelheid));
         $this->oogst=htmlspecialchars(strip_tags($this->oogst));
         $this->persDruk=htmlspecialchars(strip_tags($this->persDruk));
+        $this->actief=htmlspecialchars(strip_tags($this->actief));
 
 
 
@@ -73,11 +73,10 @@ class Vinificatie{
         // bind values
         $stmt->bindParam(":vatId", $this->vatId);
         $stmt->bindParam(":persmethodeId", $this->persmethodeId);
-        $stmt->bindParam(":actief", $this->actief);
         $stmt->bindParam(":persHoeveelheid", $this->persHoeveelheid);
         $stmt->bindParam(":oogst", $this->oogst);
-        $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":persDruk", $this->persDruk);
+        $stmt->bindParam(":actief", $this->actief);
 
 
         // execute query
