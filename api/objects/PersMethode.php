@@ -34,5 +34,36 @@ class PersMethode{
 
         return $stmt;
     }
+
+    function create(){
+
+        // query to insert record
+        $query = "INSERT INTO
+                " . $this->table_name . "
+            SET
+                methode=:methode";
+
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->methode=htmlspecialchars(strip_tags($this->methode));
+
+
+
+
+        // bind values
+        $stmt->bindParam(":methode", $this->methode);
+
+
+
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+
+    }
 }
 ?>

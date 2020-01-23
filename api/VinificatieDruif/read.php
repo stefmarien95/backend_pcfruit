@@ -5,14 +5,14 @@ header("Content-Type: application/json; charset=UTF-8");
 
 
 include_once '../config/database.php';
-include_once '../objects/VinificatieDruif.php';
+include_once '../objects/VinificatieDruifsoort.php';
 
 
 $database = new Database();
 $db = $database->getConnection();
 
 // initialize object
-$vinificatieDruif = new VinificatieDruif($db);
+$vinificatieDruif = new VinificatieDruifsoort($db);
 
 // query products
 $stmt = $vinificatieDruif->read();

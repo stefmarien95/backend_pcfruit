@@ -32,5 +32,36 @@ class DruifSoort{
 
         return $stmt;
     }
+
+
+    function create(){
+
+        // query to insert record
+        $query = "INSERT INTO
+                " . $this->table_name . "
+            SET
+                druifsoort=:druifsoort";
+
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->druifsoort=htmlspecialchars(strip_tags($this->druifsoort));
+
+
+
+        // bind values
+        $stmt->bindParam(":druifsoort", $this->druifsoort);
+
+
+
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+
+    }
 }
 ?>
