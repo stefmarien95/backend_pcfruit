@@ -33,5 +33,41 @@ class vat{
 
         return $stmt;
     }
+
+
+
+    function create(){
+
+        // query to insert record
+        $query = "INSERT INTO
+                " . $this->table_name . "
+            SET
+                nummer=:nummer, inGebruik=:inGebruik";
+
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->nummer=htmlspecialchars(strip_tags($this->nummer));
+        $this->inGebruik=htmlspecialchars(strip_tags($this->inGebruik));
+
+
+
+
+        // bind values
+        $stmt->bindParam(":nummer", $this->nummer);
+        $stmt->bindParam(":inGebruik", $this->inGebruik);
+
+
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+
+    }
+
+
 }
 ?>
