@@ -9,7 +9,7 @@ class HandmatigeMeting{
     public $id;
     public $meting;
     public $tijd;
-    public $soortmetingId;
+    public $soortMetingId;
     public $vinificatieId;
     public $gebruikerId;
 
@@ -23,7 +23,7 @@ class HandmatigeMeting{
 
         // select all query
         $query = "SELECT
-               hm.id, hm.meting,hm.tijd,hm.soortmetingId,hm.vinificatieId,hm.gebruikerId
+               hm.id, hm.meting,hm.tijd,hm.soortMetingId,hm.vinificatieId,hm.gebruikerId
             FROM
                 " . $this->table_name . " hm
                  LEFT JOIN
@@ -47,5 +47,44 @@ class HandmatigeMeting{
 
         return $stmt;
     }
+
+
+    function create(){
+
+        // query to insert record
+        $query = "INSERT INTO
+                " . $this->table_name . "
+            SET
+                meting=:meting, tijd=:tijd, soortMetingId=:soortMetingId, vinificatieId=:vinificatieId, gebruikerId=:gebruikerId";
+
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->meting=htmlspecialchars(strip_tags($this->meting));
+        $this->tijd=htmlspecialchars(strip_tags($this->tijd));
+        $this->soortMetingId=htmlspecialchars(strip_tags($this->soortMetingId));
+        $this->vinificatieId=htmlspecialchars(strip_tags($this->vinificatieId));
+        $this->gebruikerId=htmlspecialchars(strip_tags($this->gebruikerId));
+
+
+        // bind values
+        $stmt->bindParam(":meting", $this->meting);
+        $stmt->bindParam(":tijd", $this->tijd);
+        $stmt->bindParam(":soortMetingId", $this->soortMetingId);
+        $stmt->bindParam(":vinificatieId", $this->vinificatieId);
+        $stmt->bindParam(":gebruikerId", $this->gebruikerId);
+
+
+
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+
+    }
+
 }
 ?>

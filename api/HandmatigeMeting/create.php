@@ -10,28 +10,34 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 
 // instantiate product object
-include_once '../objects/PersMethode.php';
+include_once '../objects/HandmatigeMeting.php';
 
 $database = new Database();
 $db = $database->getConnection();
 
-$persMethode = new PersMethode($db);
+$handmatigeMeting= new HandmatigeMeting($db);
 
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
 
 // make sure data is not empty
 if(
-    !empty($data->methode)
-
+    !empty($data->meting)&&
+    !empty($data->tijd)&&
+    !empty($data->soortMetingId)&&
+    !empty($data->vinificatieId)&&
+    !empty($data->gebruikerId)
 
 ){
 
-    $persMethode->methode = $data->methode;
 
+    $handmatigeMeting->meting = $data->meting;
+    $handmatigeMeting->tijd=date('Y-m-d H:i:s');
+    $handmatigeMeting->soortMetingId = $data->soortMetingId;
+    $handmatigeMeting->vinificatieId = $data->vinificatieId;
+    $handmatigeMeting->gebruikerId = $data->gebruikerId;
 
-
-    if($persMethode->create()){
+    if($handmatigeMeting->create()){
 
         // set response code - 201 created
         http_response_code(201);
