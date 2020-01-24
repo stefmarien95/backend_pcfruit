@@ -3,11 +3,19 @@
 class Database{
 
 
+    private $host = "192.168.0.105";
+    private $db_name = "wijn";
+    private $username = "admin";
+    private $password = "breakers";
+    public $conn;
+
+    /*
     private $host = "localhost";
     private $db_name = "api_db";
     private $username = "root";
     private $password = "mysql";
     public $conn;
+    */
 
     // get the database connection
     public function getConnection(){

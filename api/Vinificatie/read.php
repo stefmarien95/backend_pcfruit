@@ -34,10 +34,10 @@ if($num>0){
             "id" => $id,
             "vatId" => $vatId,
             "persmethodeId" => $persmethodeId,
-            "experimentId" => $experimentId,
-            "pershoeveelheid" => $pershoeveelheid,
+            "persHoeveelheid" => $persHoeveelheid,
             "oogst" => $oogst,
             "persDruk" => $persDruk,
+            "actief" => $actief
 
 
         );

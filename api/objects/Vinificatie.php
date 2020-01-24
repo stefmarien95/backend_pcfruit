@@ -26,11 +26,11 @@ class Vinificatie{
 
         // select all query
         $query = "SELECT
-               v.id, v.vatId,v.persmethodeId,v.actief,v.persHoeveelheid,v.oogst,v.persDruk
+               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief
             FROM
                 " . $this->table_name . " v
                  LEFT JOIN
-                    PersMethode pe
+                    Persmethode pe
                         ON  v.persmethodeId= pe.id
            
                  LEFT JOIN

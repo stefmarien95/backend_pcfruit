@@ -67,10 +67,8 @@ class Event
         $this->soortEventId=htmlspecialchars(strip_tags($this->soortEventId));
         $this->vinificatieId=htmlspecialchars(strip_tags($this->vinificatieId));
         $this->gebruikerId=htmlspecialchars(strip_tags($this->gebruikerId));
-        $this->gebruikersnaam=htmlspecialchars(strip_tags($this->datum));
-        $this->wachtwoord=htmlspecialchars(strip_tags($this->wachtwoord));
-        $this->email=htmlspecialchars(strip_tags($this->email));
-        $this->telefoonnummer=htmlspecialchars(strip_tags($this->telefoonnummer));
+        $this->datum=htmlspecialchars(strip_tags($this->datum));
+
 
 
 
