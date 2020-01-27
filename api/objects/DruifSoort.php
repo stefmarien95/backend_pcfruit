@@ -3,7 +3,7 @@ class DruifSoort{
 
     // database connection and table name
     private $conn;
-    private $table_name = "DruifSoort";
+    private $table_name = "Druifsoort";
 
     // object properties
     public $id;
@@ -20,9 +20,9 @@ class DruifSoort{
 
         // select all query
         $query = "SELECT
-               ds.id, ds.druifsoort 
+               d.id, d.druifsoort 
             FROM
-                " . $this->table_name . " ds";
+                " . $this->table_name . " d";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
