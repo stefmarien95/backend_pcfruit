@@ -68,6 +68,38 @@ class vat{
 
     }
 
+    // used when filling up the update product form
+    function readOne(){
+
+        // query to read single record
+        $query = "SELECT
+                v.id, v.nummer, v.inGebruik
+            FROM
+                " . $this->table_name . " v
+           
+            WHERE
+                v.id = ?
+            LIMIT
+                0,1";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->id);
+
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->nummer = $row['nummer'];
+        $this->inGebruik = $row['inGebruik'];
+
+    }
+
 
 }
 ?>
