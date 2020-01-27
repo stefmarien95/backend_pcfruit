@@ -101,5 +101,39 @@ class vat{
     }
 
 
+    function update(){
+
+
+        $query = "UPDATE
+                " . $this->table_name . "
+            SET
+                nummer = :nummer,
+                inGebruik = :inGebruik
+              
+            WHERE
+                id = :id";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->nummer=htmlspecialchars(strip_tags($this->nummer));
+        $this->inGebruik=htmlspecialchars(strip_tags($this->inGebruik));
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+        // bind new values
+        $stmt->bindParam(':nummer', $this->nummer);
+        $stmt->bindParam(':inGebruik', $this->inGebruik);
+        $stmt->bindParam(':id', $this->id);
+
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
+
+
 }
 ?>

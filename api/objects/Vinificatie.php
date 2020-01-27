@@ -48,6 +48,62 @@ class Vinificatie{
         return $stmt;
     }
 
+    function actief(){
+
+        // select all query
+        $query = "SELECT
+               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief
+            FROM
+                " . $this->table_name . " v
+                 LEFT JOIN
+                    Persmethode pe
+                        ON  v.persmethodeId= pe.id
+           
+                 LEFT JOIN
+                    Vat va
+                        ON v.vatId= va.id
+                 WHERE
+                    actief=1      
+                        
+                  ";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    function nietActief(){
+
+        // select all query
+        $query = "SELECT
+               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief
+            FROM
+                " . $this->table_name . " v
+                 LEFT JOIN
+                    Persmethode pe
+                        ON  v.persmethodeId= pe.id
+           
+                 LEFT JOIN
+                    Vat va
+                        ON v.vatId= va.id
+                 WHERE
+                    actief=0      
+                        
+                  ";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     function create(){
 
         // query to insert record
