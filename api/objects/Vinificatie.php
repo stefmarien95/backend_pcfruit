@@ -88,7 +88,7 @@ class Vinificatie{
 
     }
 
-    // update the product
+
     function update(){
 
 

@@ -46,4 +46,44 @@ class AlarmData
 
         return $stmt;
     }
+
+    function update(){
+
+
+        $query = "UPDATE
+                " . $this->table_name . "
+             SET
+                naam = :naam,
+                minimumwaarde = :minimumwaarde,
+                maximumwaarde = :maximumwaarde,
+                fysiekeSensorId = :fysiekeSensorId
+            WHERE
+                id = :id";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+
+        $this->naam=htmlspecialchars(strip_tags($this->naam));
+        $this->minimumwaarde=htmlspecialchars(strip_tags($this->minimumwaarde));
+        $this->maximumwaarde=htmlspecialchars(strip_tags($this->maximumwaarde));
+        $this->fysiekeSensorId=htmlspecialchars(strip_tags($this->fysiekeSensorId));
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+
+        $stmt->bindParam(':naam', $this->naam);
+        $stmt->bindParam(':minimumwaarde', $this->minimumwaarde);
+        $stmt->bindParam(':maximumwaarde', $this->maximumwaarde);
+        $stmt->bindParam(':fysiekeSensorId', $this->fysiekeSensorId);
+        $stmt->bindParam(':id', $this->id);
+
+
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
 }

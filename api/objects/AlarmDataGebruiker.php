@@ -12,37 +12,49 @@ class AlarmDataGebruiker
     private $table_name = "AlarmdataGebruiker";
 
     // object properties
-    public $id;
-    public $naam;
+
     public $gebruikerId;
-    public $alarmDataId;
+    public $alarmdataId;
 
     // constructor with $db as database connection
     public function __construct($db){
         $this->conn = $db;
     }
 
-    function read(){
 
-        // select all query
-        $query = "SELECT
-               adg.id, adg.naam, adg.gebruikerId, adg.alarmDataId
-            FROM
-                " . $this->table_name . " adg
-                LEFT JOIN
-                    Gebruiker g
-                        ON adg.gebruikerId= g.id
-                LEFT JOIN
-                    AlarmData ad
-                        ON adg.alarmDataId= ad.id
-                  ";
+    function create(){
 
-        // prepare query statement
+        // query to insert record
+        $query = "INSERT INTO
+                " . $this->table_name . "
+            SET
+                gebruikerId=:gebruikerId, alarmdataId=:alarmdataId";
+
+        // prepare query
         $stmt = $this->conn->prepare($query);
 
-        // execute query
-        $stmt->execute();
+        // sanitize
+        $this->gebruikerId=htmlspecialchars(strip_tags($this->gebruikerId));
+        $this->alarmdataId=htmlspecialchars(strip_tags($this->alarmdataId));
 
-        return $stmt;
+
+
+
+
+        // bind values
+        $stmt->bindParam(":gebruikerId", $this->gebruikerId);
+        $stmt->bindParam(":alarmdataId", $this->alarmdataId);
+
+
+
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+
     }
+
+
 }
