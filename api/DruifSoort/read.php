@@ -32,7 +32,7 @@ if($num>0){
 
         $druifSoort_item=array(
             "id" => $id,
-            "druifsoort " => $druifsoort
+            "druifsoort" => $druifsoort
 
 
 
