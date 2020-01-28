@@ -30,10 +30,9 @@ if($num>0){
         extract($row);
 
         $alarmDataGebruiker_item=array(
-            "id" => $id,
-            "naam" => $naam,
-            "gebrukerId" =>$gebruikerId,
-            "alarmDataId" => $alarmDataId,
+
+            "gebruikerId" =>$gebruikerId,
+            "alarmdataId" => $alarmdataId
 
 
         );
