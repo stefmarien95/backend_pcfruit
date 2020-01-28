@@ -14,10 +14,11 @@ class AlarmData
 
     // object properties
     public $id;
-    public $naam;
+    public $soortAlarmId;
+    public $vinificatieId;
     public $minimumwaarde;
     public $maximumwaarde;
-    public $fysiekeSensorId;
+
 
 
     // constructor with $db as database connection
@@ -47,16 +48,51 @@ class AlarmData
         return $stmt;
     }
 
+    function create(){
+
+        // query to insert record
+        $query = "INSERT INTO
+                " . $this->table_name . "
+            SET
+                soortAlarmId=:soortAlarmId, minimumwaarde=:minimumwaarde, maximumwaarde=:maximumwaarde, vinificatieId=:vinificatieId";
+
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->soortAlarmId=htmlspecialchars(strip_tags($this->soortAlarmId));
+        $this->vinificatieId=htmlspecialchars(strip_tags($this->vinificatieId));
+        $this->minimumwaarde=htmlspecialchars(strip_tags($this->minimumwaarde));
+        $this->maximumwaarde=htmlspecialchars(strip_tags($this->maximumwaarde));
+
+
+
+        // bind values
+        $stmt->bindParam(":soortAlarmId", $this->soortAlarmId);
+        $stmt->bindParam(":vinificatieId", $this->vinificatieId);
+        $stmt->bindParam(":minimumwaarde", $this->minimumwaarde);
+        $stmt->bindParam(":maximumwaarde", $this->maximumwaarde);
+
+
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+
+    }
+
     function update(){
 
 
         $query = "UPDATE
                 " . $this->table_name . "
              SET
-                naam = :naam,
+                soortAlarmId = :soortAlarmId,
                 minimumwaarde = :minimumwaarde,
                 maximumwaarde = :maximumwaarde,
-                fysiekeSensorId = :fysiekeSensorId
+                vinificatieId = :vinificatieId
             WHERE
                 id = :id";
 
@@ -65,17 +101,17 @@ class AlarmData
 
         // sanitize
 
-        $this->naam=htmlspecialchars(strip_tags($this->naam));
+        $this->soortAlarmId=htmlspecialchars(strip_tags($this->soortAlarmId));
         $this->minimumwaarde=htmlspecialchars(strip_tags($this->minimumwaarde));
         $this->maximumwaarde=htmlspecialchars(strip_tags($this->maximumwaarde));
-        $this->fysiekeSensorId=htmlspecialchars(strip_tags($this->fysiekeSensorId));
+        $this->vinificatieId=htmlspecialchars(strip_tags($this->vinificatieId));
         $this->id=htmlspecialchars(strip_tags($this->id));
 
 
-        $stmt->bindParam(':naam', $this->naam);
+        $stmt->bindParam(':soortAlarmId', $this->soortAlarmId);
         $stmt->bindParam(':minimumwaarde', $this->minimumwaarde);
         $stmt->bindParam(':maximumwaarde', $this->maximumwaarde);
-        $stmt->bindParam(':fysiekeSensorId', $this->fysiekeSensorId);
+        $stmt->bindParam(':vinificatieId', $this->vinificatieId);
         $stmt->bindParam(':id', $this->id);
 
 

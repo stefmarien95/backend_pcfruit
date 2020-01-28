@@ -10,33 +10,36 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 
 // instantiate product object
-include_once '../objects/Event.php';
+include_once '../objects/AlarmData.php';
 
 $database = new Database();
 $db = $database->getConnection();
 
-$event = new Event($db);
+$alarmdata = new AlarmData($db);
 
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
 
 // make sure data is not empty
 if(
-    !empty($data->soortEventId) &&
-    !empty($data->vinificatieId) &&
-    !empty($data->gebruikerId) &&
-    !empty($data->datum)
+    !empty($data->soortAlarmId) &&
+    !empty($data->minimumwaarde) &&
+    !empty($data->maximumwaarde) &&
+    !empty($data->vinificatieId)
 
 
 ){
-    //$date1 = strtr($data->)->datum, '/', '-');
-    $event->soortEventId = $data->soortEventId;
-    $event->vinificatieId = $data->vinificatieId;
-    $event->gebruikerId = $data->gebruikerId;
-    $event->datum = date('Y-m-d H:i:s', strtotime($data->datum));
+
+    $alarmdata->soortAlarmId = $data->soortAlarmId;
+    $alarmdata->vinificatieId = $data->vinificatieId;
+    $alarmdata->minimumwaarde = $data->minimumwaarde;
+    $alarmdata->maximumwaarde = $data->maximumwaarde;
 
 
-    if($event->create()){
+
+
+
+    if($alarmdata->create()){
 
         // set response code - 201 created
         http_response_code(201);
@@ -56,7 +59,7 @@ if(
     }
 }
 
-// tell the user data is incomplete
+
 else{
 
     // set response code - 400 bad request

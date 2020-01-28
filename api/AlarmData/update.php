@@ -24,10 +24,11 @@ $data = json_decode(file_get_contents("php://input"));
 $alarmData->id = $data->id;
 
 
-$alarmData->naam = $data->naam;
+$alarmData->soortAlarmId = $data->soortAlarmId;
+$alarmData->vinificatieId = $data->vinificatieId;
 $alarmData->minimumwaarde = $data->minimumwaarde;
 $alarmData->maximumwaarde = $data->maximumwaarde;
-$alarmData->fysiekeSensorId = $data->fysiekeSensorId;
+
 
 
 if($alarmData->update()){
