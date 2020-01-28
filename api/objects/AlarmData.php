@@ -122,4 +122,38 @@ class AlarmData
 
         return false;
     }
+
+    function getByVinificatie(){
+
+        // query to read single record
+        $query = "SELECT
+                a.id, a.soortAlarmId, a.vinificatieId, a.minimumwaarde, a.maximumwaarde
+            FROM
+                " . $this->table_name . " a
+           
+            WHERE
+                a.vinificatieId = ? AND a.soortAlarmId = ?
+            LIMIT
+                0,1";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->vinificatieId);
+        $stmt->bindParam(2, $this->soortAlarmId);
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->id = $row['id'];
+        $this->soortAlarmId = $row['soortAlarmId'];
+        $this->vinificatieId = $row['vinificatieId'];
+        $this->minimumwaarde = $row['minimumwaarde'];
+        $this->maximumwaarde = $row['maximumwaarde'];
+    }
+
 }

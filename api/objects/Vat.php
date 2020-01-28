@@ -68,7 +68,7 @@ class vat{
 
     }
 
-    // used when filling up the update product form
+
     function readOne(){
 
         // query to read single record

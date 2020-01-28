@@ -57,7 +57,7 @@ class AlarmDataGebruiker
     function delete(){
 
         // delete query
-        $query = "DELETE FROM " . $this->table_name . " WHERE  gebruikerId=:gebruikerId AND alarmdataId=:alarmdataId";
+        $query = "DELETE FROM " . $this->table_name . " WHERE  gebruikerId=:gebruikerId AND alarmdataId =:alarmdataId";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
