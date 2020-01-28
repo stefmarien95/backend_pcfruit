@@ -33,7 +33,7 @@ if(
     $event->soortEventId = $data->soortEventId;
     $event->vinificatieId = $data->vinificatieId;
     $event->gebruikerId = $data->gebruikerId;
-    $event->datum =$data->datum;
+    $event->datum =$data->datum->format('Y-m-d H:i:s');
 
 
 
