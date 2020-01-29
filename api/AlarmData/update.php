@@ -28,6 +28,7 @@ $alarmData->soortAlarmId = $data->soortAlarmId;
 $alarmData->vinificatieId = $data->vinificatieId;
 $alarmData->minimumwaarde = $data->minimumwaarde;
 $alarmData->maximumwaarde = $data->maximumwaarde;
+$alarmData->actief = $data->actief;
 
 
 

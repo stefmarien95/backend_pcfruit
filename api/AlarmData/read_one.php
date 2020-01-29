@@ -15,32 +15,30 @@ $database = new Database();
 $db = $database->getConnection();
 
 // prepare product object
-$alarmData = new AlarmData($db);
+$alarmData= new AlarmData($db);
 
 // set ID property of record to read
-
-$alarmData->vinificatieId = isset($_GET['vinificatieId']) ? $_GET['vinificatieId'] : die();
-$alarmData->soortAlarmId = isset($_GET['soortAlarmId']) ? $_GET['soortAlarmId'] : die();
+$alarmData->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 
-$alarmData->getByVinificatie();
+$alarmData->readOne();
 
-if($alarmData->minimumwaarde!=null){
+if($alarmData->soortAlarmId!=null){
 
     $alarmData_arr = array(
         "id" =>  $alarmData->id,
         "soortAlarmId" => $alarmData->soortAlarmId,
-        "vinificatieId" => $alarmData->vinificatieId,
+        "vinificatieId" =>  $alarmData->vinificatieId,
         "minimumwaarde" => $alarmData->minimumwaarde,
-        "maximumwaarde" => $alarmData->maximumwaarde,
+        "maximumwaarde" =>  $alarmData->maximumwaarde,
         "actief" => $alarmData->actief
 
 
     );
 
-
     http_response_code(200);
 
+    // make it json format
     echo json_encode($alarmData_arr);
 }
 

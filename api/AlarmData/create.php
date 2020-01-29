@@ -25,6 +25,7 @@ if(
     !empty($data->soortAlarmId) &&
     !empty($data->minimumwaarde) &&
     !empty($data->maximumwaarde) &&
+    !empty($data->actief) &&
     !empty($data->vinificatieId)
 
 
@@ -34,6 +35,7 @@ if(
     $alarmdata->vinificatieId = $data->vinificatieId;
     $alarmdata->minimumwaarde = $data->minimumwaarde;
     $alarmdata->maximumwaarde = $data->maximumwaarde;
+    $alarmdata->actief = $data->actief;
 
 
 

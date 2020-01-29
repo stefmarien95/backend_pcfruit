@@ -31,10 +31,11 @@ if($num>0){
 
         $alarmData_item=array(
             "id" => $id,
-            "naam" => $naam,
+            "soortAlarmId" => $soortAlarmId,
             "minimumwaarde" =>$minimumwaarde,
-            "price" => $maximumwaarde,
-            "fysiekeSensorId" => $fysiekeSensorId,
+            "maximumwaarde" => $maximumwaarde,
+            "vinificatieId" => $vinificatieId,
+            "actief" => $actief,
 
         );
 

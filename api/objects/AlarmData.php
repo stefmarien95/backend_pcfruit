@@ -18,6 +18,7 @@ class AlarmData
     public $vinificatieId;
     public $minimumwaarde;
     public $maximumwaarde;
+    public $actief;
 
 
 
@@ -32,12 +33,9 @@ class AlarmData
 
         // select all query
         $query = "SELECT
-               ad.id, ad.naam, ad.minimumwaarde, ad.maximumwaarde, ad.fysiekeSensorId
+               a.id, a.soortAlarmId, a.vinificatieId, a.minimumwaarde, a.maximumwaarde, a.actief
             FROM
-                " . $this->table_name . " ad
-                LEFT JOIN
-                    FysiekeSensor fs
-                        ON ad.fysiekeSensorId= fs.id";
+                " . $this->table_name . " a ";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -54,7 +52,7 @@ class AlarmData
         $query = "INSERT INTO
                 " . $this->table_name . "
             SET
-                soortAlarmId=:soortAlarmId, minimumwaarde=:minimumwaarde, maximumwaarde=:maximumwaarde, vinificatieId=:vinificatieId";
+                soortAlarmId=:soortAlarmId, minimumwaarde=:minimumwaarde, maximumwaarde=:maximumwaarde, vinificatieId=:vinificatieId, actief=:actief";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -64,7 +62,7 @@ class AlarmData
         $this->vinificatieId=htmlspecialchars(strip_tags($this->vinificatieId));
         $this->minimumwaarde=htmlspecialchars(strip_tags($this->minimumwaarde));
         $this->maximumwaarde=htmlspecialchars(strip_tags($this->maximumwaarde));
-
+        $this->actief=htmlspecialchars(strip_tags($this->actief));
 
 
         // bind values
@@ -72,11 +70,11 @@ class AlarmData
         $stmt->bindParam(":vinificatieId", $this->vinificatieId);
         $stmt->bindParam(":minimumwaarde", $this->minimumwaarde);
         $stmt->bindParam(":maximumwaarde", $this->maximumwaarde);
-
+        $stmt->bindParam(":actief", $this->actief);
 
         // execute query
         if($stmt->execute()){
-            $last_id = $stmt->insert_id;
+
 
             return true;
         }
@@ -94,7 +92,9 @@ class AlarmData
                 soortAlarmId = :soortAlarmId,
                 minimumwaarde = :minimumwaarde,
                 maximumwaarde = :maximumwaarde,
-                vinificatieId = :vinificatieId
+                vinificatieId = :vinificatieId,
+                actief = :actief
+                
             WHERE
                 id = :id";
 
@@ -107,6 +107,7 @@ class AlarmData
         $this->minimumwaarde=htmlspecialchars(strip_tags($this->minimumwaarde));
         $this->maximumwaarde=htmlspecialchars(strip_tags($this->maximumwaarde));
         $this->vinificatieId=htmlspecialchars(strip_tags($this->vinificatieId));
+        $this->actief=htmlspecialchars(strip_tags($this->actief));
         $this->id=htmlspecialchars(strip_tags($this->id));
 
 
@@ -114,6 +115,7 @@ class AlarmData
         $stmt->bindParam(':minimumwaarde', $this->minimumwaarde);
         $stmt->bindParam(':maximumwaarde', $this->maximumwaarde);
         $stmt->bindParam(':vinificatieId', $this->vinificatieId);
+        $stmt->bindParam(':actief', $this->actief);
         $stmt->bindParam(':id', $this->id);
 
 
@@ -129,7 +131,7 @@ class AlarmData
 
         // query to read single record
         $query = "SELECT
-                a.id, a.soortAlarmId, a.vinificatieId, a.minimumwaarde, a.maximumwaarde
+                a.id, a.soortAlarmId, a.vinificatieId, a.minimumwaarde, a.maximumwaarde, a.actief
             FROM
                 " . $this->table_name . " a
            
@@ -156,9 +158,47 @@ class AlarmData
         $this->vinificatieId = $row['vinificatieId'];
         $this->minimumwaarde = $row['minimumwaarde'];
         $this->maximumwaarde = $row['maximumwaarde'];
+        $this->actief = $row['actief'];
 
 
 
+    }
+
+    function readOne(){
+
+        // select all query
+        $query = "SELECT
+                a.id, a.soortAlarmId, a.vinificatieId, a.minimumwaarde, a.maximumwaarde, a.actief
+            FROM
+                " . $this->table_name . " a
+               
+                 WHERE
+                    a.id = ?
+                 LIMIT
+                    0,1
+                        ";
+
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->id);
+
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->soortAlarmId = $row['soortAlarmId'];
+        $this->vinificatieId = $row['vinificatieId'];
+        $this->minimumwaarde = $row['minimumwaarde'];
+        $this->maximumwaarde = $row['maximumwaarde'];
+        $this->actief = $row['actief'];
+
+
+        return $stmt;
     }
 
 

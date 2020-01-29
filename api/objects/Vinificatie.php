@@ -135,6 +135,49 @@ class Vinificatie{
         return $stmt;
     }
 
+    function readOne(){
+
+        // select all query
+        $query = "SELECT
+               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief
+            FROM
+                " . $this->table_name . " v
+                 LEFT JOIN
+                    Persmethode pe
+                        ON  v.persmethodeId= pe.id
+           
+                 LEFT JOIN
+                    Vat va
+                        ON v.vatId= va.id
+                 WHERE
+                    v.id = ?
+                 LIMIT
+                    0,1
+                        ";
+
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->id);
+
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->vatId = $row['vatId'];
+        $this->persmethodeId = $row['persmethodeId'];
+        $this->persHoeveelheid = $row['persHoeveelheid'];
+        $this->oogst = $row['oogst'];
+        $this->persDruk = $row['persDruk'];
+        $this->actief = $row['actief'];
+
+        return $stmt;
+    }
+
     function create(){
 
         // query to insert record
