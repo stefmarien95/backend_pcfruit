@@ -71,6 +71,40 @@ class AlarmDataGebruiker
     }
     */
 
+    function getByGebruikerId(){
+
+        // query to read single record
+        $query = "SELECT
+                a.gebruikerId, a.alarmdataId 
+            FROM
+                " . $this->table_name . " a
+           
+            WHERE
+                a.gebruikerId = ?
+            ";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+
+        $stmt->bindParam(1, $this->gebruikerId);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+
+        // get retrieved row
+        //$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        //$this->gebruikerId = $row['gebruikerId'];
+        //$this->alarmdataId = $row['alarmdataId'];
+
+    }
+
+
+
 
     function create(){
 
