@@ -46,6 +46,31 @@ class AlarmData
         return $stmt;
     }
 
+    function getByVinificatieId()
+    {
+        // query to read single record
+        $query = "SELECT
+                a.id, a.soortAlarmId, a.vinificatieId, a.minimumwaarde, a.maximumwaarde, a.actief
+            FROM
+                " . $this->table_name . " a
+           
+            WHERE
+                a.vinificatieId = ?
+                ";
+
+
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(1, $this->vinificatieId);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     function create(){
 
         // query to insert record
