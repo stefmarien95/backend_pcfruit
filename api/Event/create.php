@@ -29,7 +29,7 @@ if(
 
 
 ){
-    //$date1 = strtr($data->)->datum, '/', '-');
+   // $date1 = strtr($data->datum), '/', '-');
     $event->soortEventId = $data->soortEventId;
     $event->vinificatieId = $data->vinificatieId;
     $event->gebruikerId = $data->gebruikerId;

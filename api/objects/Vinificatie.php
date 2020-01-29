@@ -104,6 +104,37 @@ class Vinificatie{
         return $stmt;
     }
 
+
+    function getLast(){
+
+        // select all query
+        $query = "SELECT
+               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief
+            FROM
+                " . $this->table_name . " v
+                 LEFT JOIN
+                    Persmethode pe
+                        ON  v.persmethodeId= pe.id
+           
+                 LEFT JOIN
+                    Vat va
+                        ON v.vatId= va.id
+                 ORDER BY 
+                    v.id 
+                 DESC 
+                    LIMIT 1      
+                        
+                  ";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     function create(){
 
         // query to insert record
@@ -137,6 +168,7 @@ class Vinificatie{
 
         // execute query
         if($stmt->execute()){
+
             return true;
         }
 

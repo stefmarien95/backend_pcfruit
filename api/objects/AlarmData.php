@@ -76,6 +76,8 @@ class AlarmData
 
         // execute query
         if($stmt->execute()){
+            $last_id = $stmt->insert_id;
+
             return true;
         }
 
@@ -154,6 +156,10 @@ class AlarmData
         $this->vinificatieId = $row['vinificatieId'];
         $this->minimumwaarde = $row['minimumwaarde'];
         $this->maximumwaarde = $row['maximumwaarde'];
+
+
+
     }
+
 
 }

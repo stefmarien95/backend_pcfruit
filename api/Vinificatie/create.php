@@ -43,11 +43,50 @@ if(
 
     if($vinificatie->create()){
 
+        $stmt = $vinificatie->read();
+        $num = $stmt->rowCount();
+
+
+        if($num>0){
+
+
+            $vinificatie_arr=array();
+            $vinificatie_arr["records"]=array();
+
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+
+                extract($row);
+
+                $vinificatie_item=array(
+                    "id" => $id,
+                    "vatId" => $vatId,
+                    "persmethodeId" => $persmethodeId,
+                    "persHoeveelheid" => $persHoeveelheid,
+                    "oogst" => $oogst,
+                    "persDruk" => $persDruk,
+                    "actief" => $actief
+
+
+                );
+
+                array_push( $vinificatie_arr["records"],  $vinificatie_item);
+            }
+
+            // set response code - 200 OK
+            http_response_code(200);
+
+
+            echo json_encode($vinificatie_arr);
+        }
+
+
         // set response code - 201 created
         http_response_code(201);
 
         // tell the user
         echo json_encode(array("message" => "item was created."));
+        echo json_encode(array( $last_id = $db->insert_id));
     }
 
     // if unable to create the , tell the user
