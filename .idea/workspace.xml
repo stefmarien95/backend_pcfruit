@@ -165,7 +165,7 @@
       <server deployment_server="c90556ef-b5da-4c4f-9677-3d895f2a0904" host="localhost" id="c5c164a1-07eb-44c4-8dcf-165328f13470" name="AMPPS" />
     </servers>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="width" value="977" />
     <option name="height" value="1038" />
@@ -288,15 +288,15 @@
       <workItem from="1579853775674" duration="8157000" />
       <workItem from="1580110695219" duration="16733000" />
       <workItem from="1580196618578" duration="17834000" />
-      <workItem from="1580284137607" duration="6540000" />
+      <workItem from="1580284137607" duration="6905000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94753000" />
+    <option name="totallyTimeSpent" value="95118000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15637584" />

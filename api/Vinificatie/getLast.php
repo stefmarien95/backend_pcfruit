@@ -42,14 +42,12 @@ if($num>0){
 
         );
 
-        array_push( $vinificatie_arr["records"],  $vinificatie_item);
+        http_response_code(200);
+
+        // make it json format
+        echo json_encode($vinificatie_item);
     }
 
-    // set response code - 200 OK
-    http_response_code(200);
-
-
-    echo json_encode($vinificatie_arr);
 }
 
 else{
