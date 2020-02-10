@@ -56,7 +56,7 @@ if($num>0){
 
 
         );
-
+/*
         $alarmDataVinificatie_item=array(
 
             "alarmData_vinificatie_vatId" =>$alarmData_vinificatie_vatId,
@@ -70,6 +70,7 @@ if($num>0){
 
 
         );
+*/
 
         array_push( $alarmDataGebruiker_arr["records"],  $alarmDataGebruiker_item);
         //array_push( $alarmDataVinificatie_arr["records"],  $alarmDataVinificatie_item);

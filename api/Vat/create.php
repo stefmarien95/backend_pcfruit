@@ -21,8 +21,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 // make sure data is not empty
 if(
-    !empty($data->nummer)&&
-    !empty($data->inGebruik)
+    !empty($data->nummer)
 
 
 ){
