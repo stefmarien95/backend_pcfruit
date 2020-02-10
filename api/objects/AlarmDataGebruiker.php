@@ -122,7 +122,7 @@ class AlarmDataGebruiker
         // query to read single record
         $query = "SELECT
                 a.gebruikerId, a.alarmdataId, ad.soortAlarmId as alarmData_soortAlarmId, ad.vinificatieId as alarmData_vinificatieId, ad.minimumwaarde as alarmData_minimumwaarde, ad.maximumwaarde as alarmData_maximumwaarde, ad.actief as alarmData_actief, 
-                v.vatId as alarmData_vinificatie_vatId, v.persmethodeId as  alarmData_vinificatie_persmethodeId, v.persHoeveelheid as alarmData_vinificatie_persHoeveelheid, v.oogst as alarmData_vinificatie_oogst, v.persDruk asalarmData_vinificatie_persDruk, v.actief as alarmData_vinificatie_actief
+                v.vatId as alarmData_vinificatie_vatId, v.persmethodeId as  alarmData_vinificatie_persmethodeId, v.persHoeveelheid as alarmData_vinificatie_persHoeveelheid, v.oogst as alarmData_vinificatie_oogst, v.persDruk as alarmData_vinificatie_persDruk, v.actief as alarmData_vinificatie_actief
                 
                 
             FROM
@@ -136,6 +136,9 @@ class AlarmDataGebruiker
                         
              WHERE
                 a.gebruikerId = ?
+                
+              GROUP BY
+                 v.vatId
             ";
 
         // prepare query statement
@@ -149,12 +152,6 @@ class AlarmDataGebruiker
 
         return $stmt;
 
-        // get retrieved row
-        //$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // set values to object properties
-        //$this->gebruikerId = $row['gebruikerId'];
-        //$this->alarmdataId = $row['alarmdataId'];
 
     }
 

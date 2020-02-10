@@ -16,7 +16,7 @@ $db = $database->getConnection();
 // initialize object
 $alarmDataGebruiker = new AlarmDataGebruiker($db);
 
-$alarmDataGebruiker->alarmdataId = isset($_GET['gebruikerId']) ? $_GET['gebruikerId'] : die();
+$alarmDataGebruiker->gebruikerId = isset($_GET['gebruikerId']) ? $_GET['gebruikerId'] : die();
 
 // query products
 $stmt = $alarmDataGebruiker->getByAlarmData();
@@ -28,8 +28,6 @@ if($num>0){
     $alarmDataGebruiker_arr=array();
     $alarmDataGebruiker_arr["records"]=array();
 
-    $alarmDataVinificatie_arr=array();
-    $alarmDataVinificatie_arr["records"]=array();
 
 
 
