@@ -9,6 +9,7 @@ class vat{
     public $id;
     public $nummer;
     public $inGebruik;
+    public $gelinkt;
 
 
 
@@ -42,7 +43,7 @@ class vat{
         $query = "INSERT INTO
                 " . $this->table_name . "
             SET
-                nummer=:nummer, inGebruik=:inGebruik";
+                nummer=:nummer, inGebruik=:inGebruik, gelinkt=:gelinkt";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -50,6 +51,7 @@ class vat{
         // sanitize
         $this->nummer=htmlspecialchars(strip_tags($this->nummer));
         $this->inGebruik=htmlspecialchars(strip_tags($this->inGebruik));
+        $this->gelinkt=htmlspecialchars(strip_tags($this->gelinkt));
 
 
 
@@ -57,6 +59,7 @@ class vat{
         // bind values
         $stmt->bindParam(":nummer", $this->nummer);
         $stmt->bindParam(":inGebruik", $this->inGebruik);
+        $stmt->bindParam(":gelinkt", $this->gelinkt);
 
 
         // execute query

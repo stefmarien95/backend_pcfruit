@@ -29,6 +29,7 @@ if(
 
     $vat->nummer = $data->nummer;
     $vat->inGebruik = $data->inGebruik;
+    $vat->gelinkt = $data->gelinkt;
 
 
     if($vat->create()){

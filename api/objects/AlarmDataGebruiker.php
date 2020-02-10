@@ -15,6 +15,20 @@ class AlarmDataGebruiker
 
     public $gebruikerId;
     public $alarmdataId;
+    public $alarmData_vinificatieId;
+    public $alarmData_soortAlarmId;
+    public $alarmData_minimumwaarde;
+    public $alarmData_maximumwaarde;
+    public $alarmData_actief;
+
+    public $alarmData_vinificatie_vatId;
+    public $alarmData_vinificatie_persmethodeId;
+    public $alarmData_vinificatie_persHoeveelheid;
+    public $alarmData_vinificatie_oogst;
+    public $alarmData_vinificatie_persDruk;
+    public $alarmData_vinificatie_actief;
+
+
 
     // constructor with $db as database connection
     public function __construct($db){
@@ -88,6 +102,48 @@ class AlarmDataGebruiker
 
 
         $stmt->bindParam(1, $this->gebruikerId);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+
+        // get retrieved row
+        //$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        //$this->gebruikerId = $row['gebruikerId'];
+        //$this->alarmdataId = $row['alarmdataId'];
+
+    }
+
+    function getByAlarmData(){
+
+        // query to read single record
+        $query = "SELECT
+                a.gebruikerId, a.alarmdataId, ad.soortAlarmId as alarmData_soortAlarmId, ad.vinificatieId as alarmData_vinificatieId, ad.minimumwaarde as alarmData_minimumwaarde, ad.maximumwaarde as alarmData_maximumwaarde, ad.actief as alarmData_actief, 
+                v.vatId as alarmData_vinificatie_vatId, v.persmethodeId as  alarmData_vinificatie_persmethodeId, v.persHoeveelheid as alarmData_vinificatie_persHoeveelheid, v.oogst as alarmData_vinificatie_oogst, v.persDruk asalarmData_vinificatie_persDruk, v.actief as alarmData_vinificatie_actief
+                
+                
+            FROM
+                " . $this->table_name . " a
+                LEFT JOIN
+                    Alarmdata ad
+                        ON a.alarmdataId  = ad.id
+                         LEFT JOIN
+                    Vinificatie v
+                        ON ad.vinificatieId  = v.id
+                        
+           
+            WHERE
+                a.alarmdataId = ?
+            ";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+
+        $stmt->bindParam(1, $this->alarmdataId);
 
         // execute query
         $stmt->execute();
