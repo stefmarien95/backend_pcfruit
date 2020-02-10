@@ -20,6 +20,15 @@ $gebruiker = new Gebruiker($db);
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
 
+$gebruiker->rolId=$data->rollId;
+$gebruiker->voornaam=$data->voornaam;
+$gebruiker->naam=$data->naam;
+$gebruiker->gebruikersnaam=$data->gebruikersnaam;
+$gebruiker->wachtwoord=$data->wachtwoord;
+$gebruiker->email=$data->email;
+$gebruiker->telefoonnummer=$data->telefoonnummer;
+
+
 // make sure data is not empty
 if(
     !empty($data->rolId) &&
