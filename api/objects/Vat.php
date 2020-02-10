@@ -43,7 +43,7 @@ class vat{
         $query = "INSERT INTO
                 " . $this->table_name . "
             SET
-                nummer=:nummer, inGebruik=:inGebruik, gelinkt=:gelinkt";
+                nummer= :nummer, inGebruik= :inGebruik, gelinkt= :gelinkt";
 
         // prepare query
         $stmt = $this->conn->prepare($query);

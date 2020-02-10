@@ -20,16 +20,11 @@ $vat = new Vat($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // make sure data is not empty
-if(
-    !empty($data->nummer)
 
-
-){
 
     $vat->nummer = $data->nummer;
     $vat->inGebruik = $data->inGebruik;
     $vat->gelinkt = $data->gelinkt;
-
 
     if($vat->create()){
 
@@ -40,18 +35,6 @@ if(
         echo json_encode(array("message" => "item was created."));
     }
 
-    // if unable to create the , tell the user
-    else{
-
-        // set response code - 503 service unavailable
-        http_response_code(503);
-
-        // tell the user
-        echo json_encode(array("message" => "Unable to create."));
-    }
-}
-
-// tell the user data is incomplete
 else{
 
     // set response code - 400 bad request

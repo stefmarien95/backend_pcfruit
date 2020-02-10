@@ -6,9 +6,10 @@ class VinificatieDruifsoort{
     private $table_name = "VinificatieDruifsoort";
 
     // object properties
-    public $id;
+
     public $druifsoortId;
     public $vinificatieId;
+    public $druifsoort;
 
 
 
@@ -16,7 +17,39 @@ class VinificatieDruifsoort{
     public function __construct($db){
         $this->conn = $db;
     }
+    function readDruif(){
 
+        // select all query
+        $query = "SELECT
+              vd.druifsoortId,vd.vinificatieId, ds.druifsoort as druifsoort
+            FROM
+                " . $this->table_name . " vd
+                 LEFT JOIN
+                    Druifsoort ds
+                        ON  vd.druifsoortId= ds.id
+           
+                        ";
+
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->id);
+
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->druifsoortId = $row['druifsoortId'];
+        $this->vinificatieId = $row['vinificatieId'];
+        $this->druifsoort = $row['druifsoort'];
+
+
+        return $stmt;
+    }
 
     function create(){
 
