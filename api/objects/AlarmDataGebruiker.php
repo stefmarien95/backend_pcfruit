@@ -134,16 +134,15 @@ class AlarmDataGebruiker
                     Vinificatie v
                         ON ad.vinificatieId  = v.id
                         
-           
-            WHERE
-                a.alarmdataId = ?
+             WHERE
+                a.gebruikerId = ?
             ";
 
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
 
 
-        $stmt->bindParam(1, $this->alarmdataId);
+        $stmt->bindParam(1, $this->gebruikerId);
 
         // execute query
         $stmt->execute();

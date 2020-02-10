@@ -16,7 +16,7 @@ $db = $database->getConnection();
 // initialize object
 $alarmDataGebruiker = new AlarmDataGebruiker($db);
 
-$alarmDataGebruiker->alarmdataId = isset($_GET['alarmdataId']) ? $_GET['alarmdataId'] : die();
+$alarmDataGebruiker->alarmdataId = isset($_GET['gebruikerId']) ? $_GET['gebruikerId'] : die();
 
 // query products
 $stmt = $alarmDataGebruiker->getByAlarmData();

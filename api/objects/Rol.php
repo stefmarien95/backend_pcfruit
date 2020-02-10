@@ -29,7 +29,7 @@ class Rol
         $query = "SELECT
                r.id, r.rolnaam
             FROM
-                " . $this->table_name . "r";
+                " . $this->table_name . " r";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
