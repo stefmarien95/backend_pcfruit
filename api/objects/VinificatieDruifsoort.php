@@ -28,24 +28,23 @@ class VinificatieDruifsoort{
                     Druifsoort ds
                         ON  vd.druifsoortId= ds.id
            
-                        ";
+                 WHERE
+                        vd.vinificatieId = ?
+                 ";
+
+
 
 
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
 
         // bind id of product to be updated
-        $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(1, $this->vinificatieId);
 
         // execute query
         $stmt->execute();
 
-        // get retrieved row
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->druifsoortId = $row['druifsoortId'];
-        $this->vinificatieId = $row['vinificatieId'];
-        $this->druifsoort = $row['druifsoort'];
 
 
         return $stmt;

@@ -88,4 +88,31 @@ class Event
         return false;
 
     }
+
+    function getByVinificatieId(){
+
+        // query to read single record
+        $query = "SELECT
+                e.id, e.soortEventId, e.vinificatieId, e.gebruikerId 
+            FROM
+                " . $this->table_name . " e
+           
+            WHERE
+                e.vinificatieId = ?
+            ";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+
+        $stmt->bindParam(1, $this->vinificatieId);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+
+
+
+    }
 }

@@ -30,7 +30,7 @@ class FysiekeSensor
             FROM
                 " . $this->table_name . " fs
                  LEFT JOIN
-                    SoortSensor ss
+                    SoortAlarm ss
                         ON  fs.soortSensorId= ss.id"
 
         ;

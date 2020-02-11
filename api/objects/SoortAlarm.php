@@ -1,19 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: maart
- * Date: 21/01/2020
- * Time: 09:20
- */
+class SoortAlarm{
 
-class SoortEvent
-{
+    // database connection and table name
     private $conn;
-    private $table_name = "SoortEvent";
+    private $table_name = "SoortAlarm";
 
     // object properties
     public $id;
     public $naam;
+
+
+
 
     // constructor with $db as database connection
     public function __construct($db){
@@ -24,11 +21,9 @@ class SoortEvent
 
         // select all query
         $query = "SELECT
-               s.id,s.naam
+               ss.id, ss.naam
             FROM
-                " . $this->table_name . " s"
-
-        ;
+                " . $this->table_name . "ss";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -38,6 +33,7 @@ class SoortEvent
 
         return $stmt;
     }
+
     function readOne(){
 
         // query to read single record
@@ -66,37 +62,6 @@ class SoortEvent
         // set values to object properties
         $this->id = $row['id'];
         $this->naam = $row['naam'];
-
-    }
-
-
-    function create(){
-
-        // query to insert record
-        $query = "INSERT INTO
-                " . $this->table_name . "
-            SET
-                naam=:naam";
-
-        // prepare query
-        $stmt = $this->conn->prepare($query);
-
-        // sanitize
-        $this->naam=htmlspecialchars(strip_tags($this->naam));
-
-
-
-        // bind values
-        $stmt->bindParam(":naam", $this->naam);
-
-
-
-        // execute query
-        if($stmt->execute()){
-            return true;
-        }
-
-        return false;
 
     }
 
