@@ -189,6 +189,8 @@ class AlarmData
 
     }
 
+
+
     function readOne(){
 
         // select all query

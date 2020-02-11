@@ -19,7 +19,7 @@ $alarmDataGebruiker = new AlarmDataGebruiker($db);
 $alarmDataGebruiker->gebruikerId = isset($_GET['gebruikerId']) ? $_GET['gebruikerId'] : die();
 
 // query products
-$stmt = $alarmDataGebruiker->getByAlarmData();
+$stmt = $alarmDataGebruiker->getRest();
 $num = $stmt->rowCount();
 
 

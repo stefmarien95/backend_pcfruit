@@ -155,6 +155,46 @@ class AlarmDataGebruiker
 
     }
 
+    function getRest(){
+
+        // query to read single record
+        $query = "SELECT
+                a.gebruikerId, a.alarmdataId, ad.soortAlarmId as alarmData_soortAlarmId, ad.vinificatieId as alarmData_vinificatieId, ad.minimumwaarde as alarmData_minimumwaarde, ad.maximumwaarde as alarmData_maximumwaarde, ad.actief as alarmData_actief, 
+                v.vatId as alarmData_vinificatie_vatId, v.persmethodeId as  alarmData_vinificatie_persmethodeId, v.persHoeveelheid as alarmData_vinificatie_persHoeveelheid, v.oogst as alarmData_vinificatie_oogst, v.persDruk as alarmData_vinificatie_persDruk, v.actief as alarmData_vinificatie_actief
+                
+                
+            FROM
+                " . $this->table_name . " a
+                LEFT JOIN
+                    Alarmdata ad
+                        ON a.alarmdataId  = ad.id
+                         LEFT JOIN
+                    Vinificatie v
+                        ON ad.vinificatieId  = v.id
+                        
+             WHERE 
+                a.gebruikerId = ? AND v.actief = 1 
+                
+             
+                
+            GROUP BY
+                 v.vatId
+            ";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+
+        $stmt->bindParam(1, $this->gebruikerId);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+
+
+    }
+
 
 
 
