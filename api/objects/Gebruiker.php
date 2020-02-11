@@ -44,6 +44,43 @@ class Gebruiker
         return $stmt;
     }
 
+    function readOne(){
+
+        $query = "SELECT
+                g.id,g.rolId,g.voornaam,g.naam,g.gebruikersnaam,g.wachtwoord,g.email,g.telefoonnummer
+            FROM
+                " . $this->table_name . " g
+           
+            WHERE
+                g.email = ? AND g.wachtwoord = ?
+            LIMIT
+                0,1";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->email);
+        $stmt->bindParam(2, $this->wachtwoord);
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->id = $row['id'];
+        $this->rolId = $row['rolId'];
+        $this->voornaam = $row['voornaam'];
+        $this->naam = $row['naam'];
+        $this->gebruikersnaam = $row['gebruikersnaam'];
+        $this->email = $row['email'];
+        $this->telefoonnummer = $row['telefoonnummer'];
+
+
+
+    }
+
 
     function create(){
 
@@ -72,8 +109,9 @@ class Gebruiker
         $stmt->bindParam(":voornaam", $this->voornaam);
         $stmt->bindParam(":naam", $this->naam);
         $stmt->bindParam(":gebruikersnaam", $this->gebruikersnaam);
-        $password_hash = password_hash($this->wachtwoord, PASSWORD_BCRYPT);
-        $stmt->bindParam(':wachtwoord', $password_hash);
+        //$password_hash = password_hash($this->wachtwoord, PASSWORD_BCRYPT);
+        //$stmt->bindParam(':wachtwoord', $password_hash);
+        $stmt->bindParam(":wachtwoord", $this->wachtwoord);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":telefoonnummer", $this->telefoonnummer);
 
