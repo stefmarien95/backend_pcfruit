@@ -115,4 +115,32 @@ class Event
 
 
     }
+
+
+    function delete(){
+
+        // delete query
+        $query = "DELETE FROM " . $this->table_name . " WHERE  id=:id";
+
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+
+
+        // bind values
+        $stmt->bindParam(":id", $this->id);
+
+
+
+
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
 }
