@@ -32,6 +32,26 @@ $gebruiker->wachtwoord = isset($_GET['wachtwoord']) ? $_GET['wachtwoord'] : die(
 
 $gebruiker->readOne();
 
+$token = array(
+    "iss" => $iss,
+    "aud" => $aud,
+    "iat" => $iat,
+    "nbf" => $nbf,
+    "data" => array(
+        "id" => $gebruiker->id,
+        "voornaam" => $gebruiker->voornaam,
+        "naam" => $gebruiker->naam,
+        "rolId" => $gebruiker->rolId,
+        "gebruikersnaam" => $gebruiker->gebruikersnaam,
+        "wachtwoord" => $gebruiker->wachtwoord,
+        "email" => $gebruiker->email,
+        "telefoonnummer" => $gebruiker->telefoonnummer
+
+
+    ));
+
+$jwt = JWT::encode($token, $key);
+
 if($gebruiker->email!=null){
 
     $gebruiker_arr = array(
@@ -42,7 +62,8 @@ if($gebruiker->email!=null){
         "gebruikersnaam" => $gebruiker->gebruikersnaam,
         "wachtwoord" => $gebruiker->wachtwoord,
         "email" => $gebruiker->email,
-        "telefoonnummer" => $gebruiker->telefoonnummer
+        "telefoonnummer" => $gebruiker->telefoonnummer,
+        "jwt" => $jwt
 
 
 
