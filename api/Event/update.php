@@ -8,37 +8,31 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 
 include_once '../config/database.php';
-include_once '../objects/Vat.php';
+include_once '../objects/Event.php';
 
 
 $database = new Database();
 $db = $database->getConnection();
 
 
-$vat = new Vat($db);
+$event = new Event($db);
 
 
 $data = json_decode(file_get_contents("php://input"));
 
 
-$vat->id = $data->id;
+$event->id = $data->id;
 
 
-$vat->nummer = $data->nummer;
-$vat->inGebruik = $data->inGebruik;
-$vat->gelinkt = $data->gelinkt;
-$vat->locatie = $data->locatie;
-$vat->materiaalId = $data->materiaalId;
-$vat->volume = $data->inGebruik;
-$vat->mangat = $data->mangat;
-$vat->deksel = $data->deksel;
-$vat->koelmantel = $data->koelmantel;
+$event->soortEventId = $data->soortEventId;
+$event->vinificatieId = $data->vinificatieId;
+$event->gebruikerId = $data->gebruikerId;
+$event->datum = $data->datum;
 
 
 
 
-
-if($vat->update()){
+if($event->update()){
 
 
     http_response_code(200);

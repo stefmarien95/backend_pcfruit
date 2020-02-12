@@ -91,5 +91,39 @@ class DruifSoort{
         return false;
 
     }
+
+
+    function update(){
+
+
+        $query = "UPDATE
+                " . $this->table_name . "
+             SET
+                druifsoort = :druifsoort
+                
+            WHERE
+                id = :id";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+
+        $this->druifsoort=htmlspecialchars(strip_tags($this->druifsoort));
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+
+        $stmt->bindParam(':druifsoort', $this->druifsoort);
+        $stmt->bindParam(':id', $this->id);
+
+
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
+
 }
 ?>

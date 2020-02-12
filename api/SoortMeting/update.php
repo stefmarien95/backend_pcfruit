@@ -8,37 +8,27 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 
 include_once '../config/database.php';
-include_once '../objects/Vat.php';
+include_once '../objects/SoortMeting.php';
 
 
 $database = new Database();
 $db = $database->getConnection();
 
 
-$vat = new Vat($db);
+$soortMeting = new SoortMeting($db);
 
 
 $data = json_decode(file_get_contents("php://input"));
 
 
-$vat->id = $data->id;
+$soortMeting->id = $data->id;
 
-
-$vat->nummer = $data->nummer;
-$vat->inGebruik = $data->inGebruik;
-$vat->gelinkt = $data->gelinkt;
-$vat->locatie = $data->locatie;
-$vat->materiaalId = $data->materiaalId;
-$vat->volume = $data->inGebruik;
-$vat->mangat = $data->mangat;
-$vat->deksel = $data->deksel;
-$vat->koelmantel = $data->koelmantel;
+$soortMeting->naam = $data->naam;
 
 
 
 
-
-if($vat->update()){
+if($soortMeting->update()){
 
 
     http_response_code(200);

@@ -8,37 +8,34 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 
 include_once '../config/database.php';
-include_once '../objects/Vat.php';
+include_once '../objects/Gebruiker.php';
 
 
 $database = new Database();
 $db = $database->getConnection();
 
 
-$vat = new Vat($db);
+$gebruiker = new Gebruiker($db);
 
 
 $data = json_decode(file_get_contents("php://input"));
 
 
-$vat->id = $data->id;
+$gebruiker->id = $data->id;
 
 
-$vat->nummer = $data->nummer;
-$vat->inGebruik = $data->inGebruik;
-$vat->gelinkt = $data->gelinkt;
-$vat->locatie = $data->locatie;
-$vat->materiaalId = $data->materiaalId;
-$vat->volume = $data->inGebruik;
-$vat->mangat = $data->mangat;
-$vat->deksel = $data->deksel;
-$vat->koelmantel = $data->koelmantel;
+$gebruiker->rolId = $data->rolId;
+$gebruiker->voornaam = $data->voornaam;
+$gebruiker->naam = $data->naam;
+$gebruiker->gebruikersnaam = $data->gebruikersnaam;
+$gebruiker->wachtwoord = $data->wachtwoord;
+$gebruiker->telefoonnummer = $data->telefoonnummer;
 
 
 
 
 
-if($vat->update()){
+if($gebruiker->update()){
 
 
     http_response_code(200);

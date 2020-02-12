@@ -34,6 +34,14 @@ if($num>0){
             "id" => $id,
             "nummer" => $nummer,
             "inGebruik" => $inGebruik,
+            "gelinkt" => $locatie,
+            "materiaalId" => $materiaalId,
+            "volume" => $volume,
+            "mangat" => $mangat,
+            "deksel" => $deksel,
+            "koelmantel" => $inGebruik
+
+
 
         );
 

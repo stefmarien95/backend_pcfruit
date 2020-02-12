@@ -26,10 +26,15 @@ $vat->readOne();
 if($vat->nummer!=null){
 
     $vat_arr = array(
-        "id" =>  $vat->id,
-        "nummer" => $vat->nummer,
-        "inGebruik" => $vat->inGebruik
-
+        "id" => $id,
+        "nummer" => $nummer,
+        "inGebruik" => $inGebruik,
+        "gelinkt" => $locatie,
+        "materiaalId" => $materiaalId,
+        "volume" => $volume,
+        "mangat" => $mangat,
+        "deksel" => $deksel,
+        "koelmantel" => $inGebruik
 
     );
 

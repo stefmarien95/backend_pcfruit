@@ -124,5 +124,37 @@ class PersMethode{
 
         return false;
     }
+
+    function update(){
+
+
+        $query = "UPDATE
+                " . $this->table_name . "
+             SET
+                methode = :methode
+                
+            WHERE
+                id = :id";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+
+        $this->methode=htmlspecialchars(strip_tags($this->methode));
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+
+        $stmt->bindParam(':methode', $this->methode);
+        $stmt->bindParam(':id', $this->id);
+
+
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
 }
 ?>

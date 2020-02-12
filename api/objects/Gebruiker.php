@@ -197,4 +197,52 @@ class Gebruiker
 
         return false;
     }
+
+    function update(){
+
+
+        $query = "UPDATE
+                " . $this->table_name . "
+            SET
+                rolId=:rolId, voornaam=:voornaam, naam=:naam, gebruikersnaam=:gebruikersnaam, wachtwoord=:wachtwoord, email=:email, telefoonnummer=:telefoonnummer                
+              
+            WHERE
+                id = :id";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->rolId=htmlspecialchars(strip_tags($this->rolId));
+        $this->voornaam=htmlspecialchars(strip_tags($this->voornaam));
+        $this->naam=htmlspecialchars(strip_tags($this->naam));
+        $this->gebruikersnaam=htmlspecialchars(strip_tags($this->gebruikersnaam));
+        $this->wachtwoord=htmlspecialchars(strip_tags($this->wachtwoord));
+        $this->email=htmlspecialchars(strip_tags($this->email));
+        $this->telefoonnummer=htmlspecialchars(strip_tags($this->telefoonnummer));
+
+
+
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+        // bind new values
+        $stmt->bindParam(":rolId", $this->rolId);
+        $stmt->bindParam(":voornaam", $this->voornaam);
+        $stmt->bindParam(":naam", $this->naam);
+        $stmt->bindParam(":gebruikersnaam", $this->gebruikersnaam);
+        $stmt->bindParam(":wachtwoord", $this->wachtwoord);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":telefoonnummer", $this->telefoonnummer);
+
+
+        $stmt->bindParam(':id', $this->id);
+
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
+
 }

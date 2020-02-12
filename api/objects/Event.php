@@ -143,4 +143,46 @@ class Event
 
         return false;
     }
+
+
+    function update(){
+
+
+        $query = "UPDATE
+                " . $this->table_name . "
+             SET
+                soortEventId = :soortEventId,
+                vinificatieId = :vinificatieId,
+                gebruikerId = :gebruikerId,
+                datum = :datum
+                
+            WHERE
+                id = :id";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+
+        $this->soortEventId=htmlspecialchars(strip_tags($this->soortEventId));
+        $this->vinificatieId=htmlspecialchars(strip_tags($this->vinificatieId));
+        $this->gebruikerId=htmlspecialchars(strip_tags($this->gebruikerId));
+        $this->datum=htmlspecialchars(strip_tags($this->datum));
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+
+        $stmt->bindParam(':soortEventId', $this->soortEventId);
+        $stmt->bindParam(':vinificatieId', $this->vinificatieId);
+        $stmt->bindParam(':gebruikerId', $this->gebruikerId);
+        $stmt->bindParam(':datum', $this->datum);
+        $stmt->bindParam(':id', $this->id);
+
+
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
 }
