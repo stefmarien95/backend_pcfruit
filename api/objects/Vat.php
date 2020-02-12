@@ -121,6 +121,14 @@ class vat{
         // set values to object properties
         $this->nummer = $row['nummer'];
         $this->inGebruik = $row['inGebruik'];
+        $this->locatie = $row['locatie'];
+        $this->materiaalId = $row['materiaalId'];
+        $this->gelinkt = $row['gelinkt'];
+        $this->volume = $row['volume'];
+        $this->deksel = $row['deksel'];
+        $this->koelmantel = $row['koelmantel'];
+        $this->mangat = $row['mangat'];
+
 
     }
 
