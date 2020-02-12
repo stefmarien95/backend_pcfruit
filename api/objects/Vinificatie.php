@@ -13,6 +13,8 @@ class Vinificatie{
     public $oogst;
     public $persDruk;
     public $actief;
+    public $wijnTypeId;
+    public $jaargang;
 
 
 
@@ -26,7 +28,7 @@ class Vinificatie{
 
         // select all query
         $query = "SELECT
-               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief
+               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief, v.wijnTypeId, v.jaargang
             FROM
                 " . $this->table_name . " v
                  LEFT JOIN
@@ -52,7 +54,7 @@ class Vinificatie{
 
         // select all query
         $query = "SELECT
-               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief
+               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief, v.wijnTypeId, v.jaargang
             FROM
                 " . $this->table_name . " v
                  LEFT JOIN
@@ -80,7 +82,7 @@ class Vinificatie{
 
         // select all query
         $query = "SELECT
-               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief
+               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief, v.wijnTypeId, v.jaargang
             FROM
                 " . $this->table_name . " v
                  LEFT JOIN
@@ -109,7 +111,7 @@ class Vinificatie{
 
         // select all query
         $query = "SELECT
-               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief
+               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief, v.wijnTypeId, v.jaargang
             FROM
                 " . $this->table_name . " v
                  LEFT JOIN
@@ -137,9 +139,9 @@ class Vinificatie{
 
     function readOne(){
 
-        // select all query
+
         $query = "SELECT
-               v.id, v.vatId,v.persmethodeId,v.persHoeveelheid,v.oogst,v.persDruk,v.actief
+               v.id, v.vatId, v.persmethodeId, v.persHoeveelheid, v.oogst, v.persDruk, v.actief, v.wijnTypeId, v.jaargang
             FROM
                 " . $this->table_name . " v
                  LEFT JOIN
@@ -149,14 +151,12 @@ class Vinificatie{
                  LEFT JOIN
                     Vat va
                         ON v.vatId= va.id
-                 WHERE
+                  WHERE
                     v.id = ?
                  LIMIT
                     0,1
                         ";
 
-
-        // prepare query statement
         $stmt = $this->conn->prepare( $query );
 
         // bind id of product to be updated
@@ -174,6 +174,8 @@ class Vinificatie{
         $this->oogst = $row['oogst'];
         $this->persDruk = $row['persDruk'];
         $this->actief = $row['actief'];
+        $this->wijnTypeId = $row['wijnTypeId'];
+        $this->jaargang = $row['jaargang'];
 
         return $stmt;
     }
@@ -184,7 +186,7 @@ class Vinificatie{
         $query = "INSERT INTO
                 " . $this->table_name . "
             SET
-                vatId=:vatId, persmethodeId=:persmethodeId,persHoeveelheid=:persHoeveelheid, oogst=:oogst, persDruk=:persDruk, actief=:actief";
+                vatId=:vatId, persmethodeId=:persmethodeId,persHoeveelheid=:persHoeveelheid, oogst=:oogst, persDruk=:persDruk, actief=:actief, wijnTypeId=:wijnTypeId, jaargang=:jaargang";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -196,6 +198,8 @@ class Vinificatie{
         $this->oogst=htmlspecialchars(strip_tags($this->oogst));
         $this->persDruk=htmlspecialchars(strip_tags($this->persDruk));
         $this->actief=htmlspecialchars(strip_tags($this->actief));
+        $this->wijnTypeId=htmlspecialchars(strip_tags($this->wijnTypeId));
+        $this->jaargang=htmlspecialchars(strip_tags($this->jaargang));
 
 
 
@@ -207,7 +211,8 @@ class Vinificatie{
         $stmt->bindParam(":oogst", $this->oogst);
         $stmt->bindParam(":persDruk", $this->persDruk);
         $stmt->bindParam(":actief", $this->actief);
-
+        $stmt->bindParam(":wijnTypeId", $this->wijnTypeId);
+        $stmt->bindParam(":jaargang", $this->jaargang);
 
         // execute query
         if($stmt->execute()){
@@ -225,13 +230,9 @@ class Vinificatie{
 
         $query = "UPDATE
                 " . $this->table_name . "
-            SET
-                vatId = :vatId,
-                persmethodeId = :persmethodeId,
-                persHoeveelheid = :persHoeveelheid,
-                oogst = :oogst,
-                persDruk = :persDruk,
-                actief = :actief
+           SET
+                vatId=:vatId, persmethodeId=:persmethodeId, persHoeveelheid=:persHoeveelheid, oogst=:oogst, persDruk=:persDruk, actief=:actief, wijnTypeId=:wijnTypeId, jaargang=:jaargang
+
             WHERE
                 id = :id";
 
@@ -245,16 +246,18 @@ class Vinificatie{
         $this->oogst=htmlspecialchars(strip_tags($this->oogst));
         $this->persDruk=htmlspecialchars(strip_tags($this->persDruk));
         $this->actief=htmlspecialchars(strip_tags($this->actief));
-        $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->wijnTypeId=htmlspecialchars(strip_tags($this->wijnTypeId));
+        $this->jaargang=htmlspecialchars(strip_tags($this->jaargang));
 
         // bind new values
-        $stmt->bindParam(':vatId', $this->vatId);
-        $stmt->bindParam(':persmethodeId', $this->persmethodeId);
-        $stmt->bindParam(':persHoeveelheid', $this->persHoeveelheid);
-        $stmt->bindParam(':oogst', $this->oogst);
-        $stmt->bindParam(':persDruk', $this->persDruk);
-        $stmt->bindParam(':actief', $this->actief);
-        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(":vatId", $this->vatId);
+        $stmt->bindParam(":persmethodeId", $this->persmethodeId);
+        $stmt->bindParam(":persHoeveelheid", $this->persHoeveelheid);
+        $stmt->bindParam(":oogst", $this->oogst);
+        $stmt->bindParam(":persDruk", $this->persDruk);
+        $stmt->bindParam(":actief", $this->actief);
+        $stmt->bindParam(":wijnTypeId", $this->wijnTypeId);
+        $stmt->bindParam(":jaargang", $this->jaargang);
 
         // execute the query
         if($stmt->execute()){

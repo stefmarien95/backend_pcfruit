@@ -37,7 +37,9 @@ if($num>0){
             "persHoeveelheid" => $persHoeveelheid,
             "oogst" => $oogst,
             "persDruk" => $persDruk,
-            "actief" => $actief
+            "actief" => $actief,
+            "wijnTypeId" => $wijnTypeId,
+            "jaargang" => $jaargang
 
 
         );

@@ -8,33 +8,27 @@ header('Content-Type: application/json');
 
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/Vinificatie.php';
+include_once '../objects/Materiaal.php';
 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
 
 // prepare product object
-$vinificatie = new Vinificatie($db);
+$materiaal = new Materiaal($db);
 
 // set ID property of record to read
-$vinificatie->id = isset($_GET['id']) ? $_GET['id'] : die();
+$materiaal->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 
-$vinificatie->readOne();
+$materiaal->readOne();
 
-if($vinificatie->vatId!=null){
+if($materiaal->id!=null){
 
-    $vinificatie_arr = array(
-        "id" => $id,
-        "vatId" => $vatId,
-        "persmethodeId" => $persmethodeId,
-        "persHoeveelheid" => $persHoeveelheid,
-        "oogst" => $oogst,
-        "persDruk" => $persDruk,
-        "actief" => $actief,
-        "wijnTypeId" => $wijnTypeId,
-        "jaargang" => $jaargang
+    $materiaal_arr = array(
+        "id" =>  $materiaal->id,
+        "naam" => $materiaal->naam
+
 
 
     );
@@ -42,8 +36,8 @@ if($vinificatie->vatId!=null){
 
     http_response_code(200);
 
-    // make it json format
-    echo json_encode($vinificatie_arr);
+
+    echo json_encode( $materiaal_arr );
 }
 
 else{

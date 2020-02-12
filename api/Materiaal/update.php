@@ -8,41 +8,34 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 
 include_once '../config/database.php';
-include_once '../objects/Vinificatie.php';
+include_once '../objects/Materiaal.php';
 
 
 $database = new Database();
 $db = $database->getConnection();
 
 
-$vinificatie = new Vinificatie($db);
+$materiaal = new Materiaal($db);
 
 
 $data = json_decode(file_get_contents("php://input"));
 
 
-$vinificatie->id = $data->id;
+$materiaal->id = $data->id;
 
-// set product property values
-$vinificatie->vatId = $data->vatId;
-$vinificatie->persmethodeId = $data->persmethodeId;
-$vinificatie->persHoeveelheid = $data->persHoeveelheid;
-$vinificatie->oogst = $data->oogst;
-$vinificatie->persDruk = $data->persDruk;
-$vinificatie->actief = $data->actief;
-$vinificatie->wijnTypeId= $data->wijnTypeId;
-$vinificatie->jaargang = $data->jaargang;
+$materiaal->naam = $data->naam;
 
-if($vinificatie->update()){
 
-    // set response code - 200 ok
+
+
+if($materiaal->update()){
+
+
     http_response_code(200);
 
-    // tell the user
     echo json_encode(array("message" => "Item was updated."));
 }
 
-// if unable to update the product, tell the user
 else{
 
     // set response code - 503 service unavailable

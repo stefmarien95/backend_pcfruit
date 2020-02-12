@@ -27,7 +27,9 @@ if(
     !empty($data->persHoeveelheid) &&
     !empty($data->oogst) &&
     !empty($data->persDruk) &&
-    !empty($data->actief)
+    !empty($data->actief) &&
+    !empty($data->wijnTypeId) &&
+    !empty($data->jaargang)
 
 
 ){
@@ -38,6 +40,9 @@ if(
     $vinificatie->oogst = $data->oogst;
     $vinificatie->persDruk= $data->persDruk;
     $vinificatie->actief = $data->actief;
+    $vinificatie->wijnTypeId= $data->wijnTypeId;
+    $vinificatie->jaargang = $data->jaargang;
+
 
 
 
@@ -65,7 +70,10 @@ if(
                     "persHoeveelheid" => $persHoeveelheid,
                     "oogst" => $oogst,
                     "persDruk" => $persDruk,
-                    "actief" => $actief
+                    "actief" => $actief,
+                    "wijnTypeId" => $wijnTypeId,
+                    "jaargang" => $jaargang
+
 
 
                 );

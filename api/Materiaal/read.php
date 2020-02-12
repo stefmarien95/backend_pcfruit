@@ -5,53 +5,46 @@ header("Content-Type: application/json; charset=UTF-8");
 
 
 include_once '../config/database.php';
-include_once '../objects/Vinificatie.php';
+include_once '../objects/Materiaal.php';
 
 
 $database = new Database();
 $db = $database->getConnection();
 
 // initialize object
-$vinificatie = new Vinificatie($db);
+$materiaal = new Materiaal($db);
 
 // query products
-$stmt = $vinificatie->read();
+$stmt = $materiaal->read();
 $num = $stmt->rowCount();
 
 
 if($num>0){
 
 
-    $vinificatie_arr=array();
-    $vinificatie_arr["records"]=array();
+    $materiaal_arr=array();
+    $materiaal_arr["records"]=array();
 
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
         extract($row);
 
-        $vinificatie_item=array(
+        $materiaal_item=array(
             "id" => $id,
-            "vatId" => $vatId,
-            "persmethodeId" => $persmethodeId,
-            "persHoeveelheid" => $persHoeveelheid,
-            "oogst" => $oogst,
-            "persDruk" => $persDruk,
-            "actief" => $actief,
-            "wijnTypeId" => $wijnTypeId,
-            "jaargang" => $jaargang
+            "naam" => $naam,
 
 
         );
 
-        array_push( $vinificatie_arr["records"],  $vinificatie_item);
+        array_push( $materiaal_arr["records"],  $materiaal_item);
     }
 
     // set response code - 200 OK
     http_response_code(200);
 
 
-    echo json_encode($vinificatie_arr);
+    echo json_encode($materiaal_arr);
 }
 
 else{
