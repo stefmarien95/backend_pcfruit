@@ -26,15 +26,15 @@ $vinificatie->readOne();
 if($vinificatie->vatId!=null){
 
     $vinificatie_arr = array(
-        "id" => $id,
-        "vatId" => $vatId,
-        "persmethodeId" => $persmethodeId,
-        "persHoeveelheid" => $persHoeveelheid,
-        "oogst" => $oogst,
-        "persDruk" => $persDruk,
-        "actief" => $actief,
-        "wijnTypeId" => $wijnTypeId,
-        "jaargang" => $jaargang
+        "id" => $vinificatie->id,
+        "vatId" => $vinificatie->vatId,
+        "persmethodeId" =>$vinificatie->persmethodeId,
+        "persHoeveelheid" => $vinificatie->persHoeveelheid,
+        "oogst" => $vinificatie->oogst,
+        "persDruk" => $vinificatie->persDruk,
+        "actief" => $vinificatie->actief,
+        "wijnTypeId" => $vinificatie->wijnTypeId,
+        "jaargang" =>$vinificatie->jaargang
 
 
     );
