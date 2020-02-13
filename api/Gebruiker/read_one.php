@@ -25,13 +25,15 @@ $gebruiker->readOne();
 
 if($gebruiker->id!=null){
 
-    $alarmData_arr = array(
-        "id" =>  $alarmData->id,
-        "soortAlarmId" => $alarmData->soortAlarmId,
-        "vinificatieId" =>  $alarmData->vinificatieId,
-        "minimumwaarde" => $alarmData->minimumwaarde,
-        "maximumwaarde" =>  $alarmData->maximumwaarde,
-        "actief" => $alarmData->actief
+    $gebruiker_arr = array(
+        "id" =>  $gebruiker->id,
+        "rollId" => $gebruiker->rollId,
+        "voornaam" =>  $gebruiker->voornaam,
+        "naam" => $gebruiker->naam,
+        "gebruikersnaam" =>  $gebruiker->gebruikersnaam,
+        "wachtwoord" => $gebruiker->wachtwoord,
+        "email" => $gebruiker->email,
+        "telefoonnummer" => $gebruiker->telefoonnummer
 
 
     );
@@ -39,7 +41,7 @@ if($gebruiker->id!=null){
     http_response_code(200);
 
     // make it json format
-    echo json_encode($alarmData_arr);
+    echo json_encode($gebruiker_arr);
 }
 
 else{

@@ -39,7 +39,9 @@ if($num>0){
             "volume" => $volume,
             "mangat" => $mangat,
             "deksel" => $deksel,
-            "koelmantel" => $koelmantel
+            "koelmantel" => $koelmantel,
+            "locatie" => $locatie
+
 
 
 
