@@ -88,7 +88,7 @@ class HandmatigeMeting{
 
     function getByVinificatieId(){
 
-        // query to read single record
+
         $query = "SELECT
                 h.id, h.soortMetingId, h.vinificatieId, h.gebruikerId, h.meting, h.tijd 
             FROM
