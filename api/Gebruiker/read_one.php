@@ -27,7 +27,7 @@ if($gebruiker->id!=null){
 
     $gebruiker_arr = array(
         "id" =>  $gebruiker->id,
-        "rollId" => $gebruiker->rollId,
+        "rollId" => $gebruiker->rolId,
         "voornaam" =>  $gebruiker->voornaam,
         "naam" => $gebruiker->naam,
         "gebruikersnaam" =>  $gebruiker->gebruikersnaam,

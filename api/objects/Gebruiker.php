@@ -112,6 +112,8 @@ class Gebruiker
         $this->naam = $row['naam'];
         $this->gebruikersnaam = $row['gebruikersnaam'];
         $this->email = $row['email'];
+        $this->wachtwoord = $row['wachtwoord'];
+
         $this->telefoonnummer = $row['telefoonnummer'];
 
 
