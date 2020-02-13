@@ -8,41 +8,36 @@ header('Content-Type: application/json');
 
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/Vat.php';
+include_once '../objects/SoortMeting.php';
 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
 
 // prepare product object
-$vat = new Vat($db);
+$soortMeting = new soortMeting($db);
 
 // set ID property of record to read
-$vat->id = isset($_GET['id']) ? $_GET['id'] : die();
+$soortMeting->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 
-$vat->readOne();
+$soortMeting->readOne();
 
-if($vat->nummer!=null){
+if($soortMeting->id!=null){
 
-    $vat_arr = array(
-        "id" => $vat->id,
-        "nummer" => $vat->nummer,
-        "inGebruik" => $vat->inGebruik,
-        "gelinkt" => $vat->gelinkt,
-        "materiaalId" => $vat->materiaalId,
-        "volume" => $vat->volume,
-        "mangat" => $vat->mangat,
-        "deksel" => $vat->deksel,
-        "koelmantel" => $vat->koelmantel
+    $soortMeting_arr = array(
+        "id" =>  $soortMeting->id,
+        "naam" => $soortMeting->naam
+
+
 
     );
 
 
     http_response_code(200);
 
-    // make it json format
-    echo json_encode($vat_arr);
+
+    echo json_encode( $soortMeting_arr );
 }
 
 else{

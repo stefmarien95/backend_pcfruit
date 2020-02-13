@@ -122,6 +122,37 @@ class soortMeting{
         return false;
     }
 
+    function readOne(){
+
+        // query to read single record
+        $query = "SELECT
+                s.id, s.naam
+            FROM
+                " . $this->table_name . " s
+           
+            WHERE
+                s.id = ?
+            LIMIT
+                0,1";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->id);
+
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->id = $row['id'];
+        $this->naam = $row['naam'];
+
+    }
+
 
 
 }

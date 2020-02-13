@@ -186,7 +186,7 @@ class Vinificatie{
         $query = "INSERT INTO
                 " . $this->table_name . "
             SET
-                vatId=:vatId, persmethodeId=:persmethodeId,persHoeveelheid=:persHoeveelheid, oogst=:oogst, persDruk=:persDruk, actief=:actief, wijnTypeId=:wijnTypeId, jaargang=:jaargang";
+                vatId=:vatId, persmethodeId=:persmethodeId, persHoeveelheid=:persHoeveelheid, oogst=:oogst, persDruk=:persDruk, actief=:actief, wijnTypeId=:wijnTypeId, jaargang=:jaargang";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -249,6 +249,8 @@ class Vinificatie{
         $this->wijnTypeId=htmlspecialchars(strip_tags($this->wijnTypeId));
         $this->jaargang=htmlspecialchars(strip_tags($this->jaargang));
 
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
         // bind new values
         $stmt->bindParam(":vatId", $this->vatId);
         $stmt->bindParam(":persmethodeId", $this->persmethodeId);
@@ -258,6 +260,9 @@ class Vinificatie{
         $stmt->bindParam(":actief", $this->actief);
         $stmt->bindParam(":wijnTypeId", $this->wijnTypeId);
         $stmt->bindParam(":jaargang", $this->jaargang);
+
+        $stmt->bindParam(':id', $this->id);
+
 
         // execute the query
         if($stmt->execute()){

@@ -100,4 +100,62 @@ class SoortEvent
 
     }
 
+    function delete(){
+
+        // delete query
+        $query = "DELETE FROM " . $this->table_name . " WHERE  id=:id";
+
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+
+
+        // bind values
+        $stmt->bindParam(":id", $this->id);
+
+
+
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
+
+    function update(){
+
+
+        $query = "UPDATE
+                " . $this->table_name . "
+             SET
+                naam = :naam
+                
+            WHERE
+                id = :id";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+
+        $this->naam=htmlspecialchars(strip_tags($this->naam));
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+
+        $stmt->bindParam(':naam', $this->naam);
+        $stmt->bindParam(':id', $this->id);
+
+
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
+
 }
