@@ -32,7 +32,7 @@ if(
 
 
     $handmatigeMeting->meting = $data->meting;
-    $handmatigeMeting->tijd=$data->tijd;
+    $handmatigeMeting->tijd=date("Y-m-d H:i:s");
     $handmatigeMeting->soortMetingId = $data->soortMetingId;
     $handmatigeMeting->vinificatieId = $data->vinificatieId;
     $handmatigeMeting->gebruikerId = $data->gebruikerId;

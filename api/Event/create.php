@@ -29,11 +29,15 @@ if(
 
 
 ){
+
+
    // $date1 = strtr($data->datum), '/', '-');
     $event->soortEventId = $data->soortEventId;
     $event->vinificatieId = $data->vinificatieId;
     $event->gebruikerId = $data->gebruikerId;
-    $event->datum = date('Y-m-d H:i:s', strtotime($data->datum));
+    $event->datum =date("Y-m-d H:i:s");
+
+    //$event->datum =gmdate('Y-m-d H:i:s', $data->datum);
 
 
     if($event->create()){
