@@ -86,5 +86,36 @@ class HandmatigeMeting{
 
     }
 
+    function getByVinificatieId(){
+
+        // query to read single record
+        $query = "SELECT
+                h.id, h.soortMetingId, h.vinificatieId, h.gebruikerId, h.meting, h.tijd 
+            FROM
+                " . $this->table_name . " h
+           
+            WHERE
+                h.vinificatieId = ?
+                
+            ORDER BY
+                h.soortMetingId, h.tijd
+                
+            ";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+
+        $stmt->bindParam(1, $this->vinificatieId);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+
+
+
+    }
+
 }
 ?>
