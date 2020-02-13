@@ -28,7 +28,7 @@ class Event
 
         // select all query
         $query = "SELECT
-               e.id, e.soortEventId,e.vinificatieId,e.gebruikerId,e.datum
+               e.id, e.soortEventId,e.vinificatieId,e.gebruikerId, e.datum
             FROM
                 " . $this->table_name . " e
                  LEFT JOIN
@@ -93,7 +93,7 @@ class Event
 
         // query to read single record
         $query = "SELECT
-                e.id, e.soortEventId, e.vinificatieId, e.gebruikerId 
+                e.id, e.soortEventId, e.vinificatieId, e.gebruikerId, e.datum
             FROM
                 " . $this->table_name . " e
            

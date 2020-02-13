@@ -38,7 +38,8 @@ if($num>0){
             "id" =>$id,
             "soortEventId" => $soortEventId,
             "vinificatieId" =>$vinificatieId,
-            "gebruikerId" => $gebruikerId
+            "gebruikerId" => $gebruikerId,
+            "datum" =>$datum
 
 
         );
