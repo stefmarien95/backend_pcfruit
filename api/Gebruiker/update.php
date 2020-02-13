@@ -30,6 +30,7 @@ $gebruiker->naam = $data->naam;
 $gebruiker->gebruikersnaam = $data->gebruikersnaam;
 $gebruiker->wachtwoord = $data->wachtwoord;
 $gebruiker->telefoonnummer = $data->telefoonnummer;
+$gebruiker->email=$data->email;
 
 
 
