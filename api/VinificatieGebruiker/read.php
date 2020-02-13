@@ -31,7 +31,7 @@ if($num>0){
         extract($row);
 
         $vinificatieGebruiker_item=array(
-            "id" => $id,
+
             "gebruikerId" => $gebruikerId,
             "vinificatieId" => $vinificatieId,
            
