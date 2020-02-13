@@ -81,6 +81,43 @@ class Gebruiker
 
     }
 
+    function readOneID(){
+
+        $query = "SELECT
+                g.id, g.rolId, g.voornaam, g.naam, g.gebruikersnaam, g.wachtwoord,g.email,g.telefoonnummer
+            FROM
+                " . $this->table_name . " g
+           
+            WHERE
+                g.id = ? 
+            LIMIT
+                0,1";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->id);
+
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->id = $row['id'];
+        $this->rolId = $row['rolId'];
+        $this->voornaam = $row['voornaam'];
+        $this->naam = $row['naam'];
+        $this->gebruikersnaam = $row['gebruikersnaam'];
+        $this->email = $row['email'];
+        $this->telefoonnummer = $row['telefoonnummer'];
+
+
+
+    }
+
 
     function create(){
 

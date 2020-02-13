@@ -21,7 +21,7 @@ $gebruiker= new Gebruiker($db);
 $gebruiker->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 
-$gebruiker->readOne();
+$gebruiker->readOneID();
 
 if($gebruiker->id!=null){
 

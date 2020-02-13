@@ -35,7 +35,7 @@ if($vat->nummer!=null){
         "mangat" => $vat->mangat,
         "deksel" => $vat->deksel,
         "koelmantel" => $vat->koelmantel,
-        "locatie" => $locatie
+        "locatie" => $vat->locatie
 
     );
 
