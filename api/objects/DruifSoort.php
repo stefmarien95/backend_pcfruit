@@ -22,7 +22,8 @@ class DruifSoort{
         $query = "SELECT
                d.id, d.druifsoort 
             FROM
-                " . $this->table_name . " d";
+                " . $this->table_name . " d
+            ORDER BY d.druifsoort";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
